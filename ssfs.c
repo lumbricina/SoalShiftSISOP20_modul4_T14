@@ -18,8 +18,7 @@ void enkripsi (char str[1000]) {
 
 	for (x = 0; x < strlen(str) && str[x] != '\0'; x++) {
 		for (y = 0; y < strlen(key) && str[y] != '\0'; y++) {
-			if(str[x] == key[y]) {
-				str[x] = key[(y+10)%strlen(key)];
+			if(str[x] == key[y]) { str[x] = key[(y+10)%strlen(key)];
 				break;
  			}
 		}
@@ -50,7 +49,6 @@ static int enfile (const char *path, void *buf, fuse_fill_dir_t filler,off_t off
         strcpy(namafile, de->d_name);
 
         if (strcmp(".", de->d_name) != 0 && strcmp("..", de->d_name) != 0 && de->d_type == 4){
-            
             char folder[101]; //entah mengapa kalau 100 errornya nambah
             sprintf(folder, "%s/%s", path, namafile);
             enfile(folder);
@@ -59,6 +57,7 @@ static int enfile (const char *path, void *buf, fuse_fill_dir_t filler,off_t off
         }
         
         if (de->d_type == 8) {
+		
             enkripsi(namafile);
             printf("file : %s\n", namafile);
         }
