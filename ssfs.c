@@ -56,7 +56,7 @@ static int xmp_getattr(const char *path, struct stat *stbuf) {
 
     sprintf(nama,"%s",path);
 	enkripsi(nama);
-	
+
 	sprintf(fpath, "%s%s",dirpath,nama);
 	printf("getattr custom %s\n", fpath);
 	
@@ -66,15 +66,14 @@ static int xmp_getattr(const char *path, struct stat *stbuf) {
 	strcpy(yangbaru, fpath);
 	yangbaru[len - 4] = '\0';
         res = lstat(fpath, stbuf);
-	
+	}
     if (res != 0){
 		return -ENOENT;
 	}
 	return 0;
-}
 
+}
 static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi) {
-	int res;
 
     DIR *dp;
 	struct dirent *de;
